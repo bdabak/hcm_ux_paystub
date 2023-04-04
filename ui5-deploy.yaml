@@ -1,0 +1,24 @@
+# yaml-language-server: $schema=https://sap.github.io/ui5-tooling/schema/ui5.yaml.json
+
+specVersion: "2.4"
+metadata:
+  name: com.sedef.hcm.ux.mypaystubs
+type: application
+builder:
+  resources:
+    excludes:
+      - /test/**
+      - /localService/**
+  customTasks:
+    - name: deploy-to-abap
+      afterTask: generateCachebusterInfo
+      configuration:
+        target:
+          destination: SEDEF
+          url: http://fioritest.sedefshipyard.com:8000
+          client: "100"
+        app:
+          name: ZHCM_UX_PAYSTUB
+          description: e-Bordro
+          package: ZHR
+          transport: SFDK900214

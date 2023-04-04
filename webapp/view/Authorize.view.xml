@@ -1,0 +1,18 @@
+<mvc:View xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m" controllerName="com.sedef.hcm.ux.mypaystubs.controller.Authorize"
+    xmlns:smod="com.sedef.hcm.ux.mypaystubs.controls">
+    <Page busy="{authorizeModel>/busy}" busyIndicatorDelay="0" class="auth-page">
+        <content>
+            <FlexBox alignItems="Center" justifyContent="Center" height="100%" class="auth-page-welcome-panel" direction="Column">
+                <smod:Blob />
+                <FlexBox alignItems="Center" justifyContent="Center" class="auth-page-welcome-panel-form" direction="Column">
+                    <Text text="İki Faktörlü Doğrulama" class="auth-page-tfa-title" textAlign="Center" />
+                    <Text text="E-bordro sistemine hoşgeldiniz. Giriş için doğrulama kodu girmelisiniz." textAlign="Center" class="auth-page-tfa-body sapUiSmallMarginTopBottom" visible="{= ${authorizeModel>/passCode} ? false : true }"/>
+                    <Text text="{authorizeModel>/passCode} referans koduyla cep telefonunuza gönderilen doğrulama kodunu giriniz." textAlign="Center" class="auth-page-tfa-body sapUiSmallMarginTopBottom" visible="{= ${authorizeModel>/passCode} ? true : false }" />
+                    <smod:CodeInput id="secretCodeInput" digits="6" buttonText="Doğrula" visible="{authorizeModel>/showPin}" class="sapUiSmallMarginBottom" verifyPressed=".onVerifyPressed" />
+                    <Button text="{= ${authorizeModel>/passCode} ? 'Yeni kod gönder' : 'SMS doğrulama' }" type="{= ${authorizeModel>/passCode} ? 'Transparent' : 'Emphasized' }" press=".onLoginViaSms" icon="sap-icon://iphone" visible="{authorizeModel>/showSms}" class="sapUiSmallMarginTop"/>
+                </FlexBox>
+            </FlexBox>
+        </content>
+    </Page>
+</mvc:View>

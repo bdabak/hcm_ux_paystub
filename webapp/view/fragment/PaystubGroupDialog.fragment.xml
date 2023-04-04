@@ -1,0 +1,13 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition id="PaystubSortDialogFragment" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<ViewSettingsDialog confirm="onGroupDialogConfirmed" id="groupViewSettingsDialog" groupDescending="true">
+		<groupItems>
+			<ViewSettingsItem id="viewSetItemPayYear" key="PayrollYear" text="{/#Paystub/PayrollYear/@sap:label}" selected="false"/>
+			<!--<ViewSettingsItem id="viewSetItemPayText" key="PayrollTypeText" text="{/#Paystub/PayrollTypeText/@sap:label}"/>-->
+		</groupItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

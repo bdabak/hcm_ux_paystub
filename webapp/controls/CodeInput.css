@@ -1,0 +1,160 @@
+.smod-code-input-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+}
+.smod-code-input-form {
+  display: block;
+  width: 100%;
+  margin: 10px auto 20px;
+  padding: 0;
+}
+
+.smod-code-input-form:before,
+.smod-code-input-form:after {
+  display: table;
+  content: "";
+}
+.smod-code-input-form:after {
+  clear: both;
+}
+
+.smod-code-input-form .smod-code-input-cell {
+  -moz-appearance: none;
+  -webkit-appearance: none;
+  appearance: none;
+  display: inline-block;
+  font-family: "Ubuntu Mono", monospace;
+  font-weight: 700;
+  width: 15%;
+  height: 50px;
+  line-height: 48px;
+  text-align: center;
+  font-size: 2em;
+  color: #181819;
+  border: 0;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.3);
+  border-radius: 2px 2px 0 0;
+  transition: background-color 0.3s, color 0.3s, opacity 0.3s;
+  cursor: default;
+  user-select: none;
+  margin: 0;
+  margin-top: 10px;
+  margin-right: 2%;
+  padding: 0;
+  transition: background-color 0.3s ease-in-out;
+}
+.smod-code-input-form .smod-code-input-cell:focus {
+  outline: 0;
+  box-shadow: none;
+  border-color: #0476e1;
+  animation: border-pulsate 1.5s infinite;
+  -webkit-tap-highlight-color: transparent;
+}
+.smod-code-input-form .smod-code-input-cell[disabled] {
+  background: #eee;
+  opacity: 1;
+}
+.smod-code-input-form .smod-code-input-cell:last-child {
+  margin-right: 0;
+}
+
+.smod-code-input-form.success .smod-code-input-cell {
+  background-color: #28a745;
+  color: #fff;
+  opacity: 1;
+}
+
+.smod-code-input-validate-button {
+  height: 3rem !important;
+  line-height: 3rem !important;
+}
+
+.smod-code-input-validate-button .sapMBtnInner {
+  font-size: 1rem;
+  height: 3rem;
+  line-height: 3rem;
+  padding-left: 1.7rem !important;
+  padding-right: 1.7rem !important;
+  border-width: 2px !important;
+}
+
+.smod-code-input-validate-button .sapMBtnContent {
+  height: 2.75rem;
+  line-height: 2.75rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+/* Animations
+   ============================================== */
+@-moz-keyframes border-pulsate {
+  0% {
+    border-color: #1486f0;
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    border-color: #1486f0;
+  }
+}
+@-webkit-keyframes border-pulsate {
+  0% {
+    border-color: #1486f0;
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    border-color: #1486f0;
+  }
+}
+@-o-keyframes border-pulsate {
+  0% {
+    border-color: #1486f0;
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    border-color: #1486f0;
+  }
+}
+@keyframes border-pulsate {
+  0% {
+    border-color: #1486f0;
+  }
+  50% {
+    border-color: rgba(0, 0, 0, 0.3);
+  }
+  100% {
+    border-color: #1486f0;
+  }
+}
+
+/* Placeholder
+   ============================================== */
+/* Chrome/Opera/Safari */
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.7;
+}
+/* Firefox 19+ */
+::-moz-placeholder {
+  color: inherit;
+  opacity: 0.7;
+}
+/* IE 10+ */
+:-ms-input-placeholder {
+  color: inherit;
+  opacity: 0.7;
+}
+/* Firefox 18- */
+:-moz-placeholder {
+  color: inherit;
+  opacity: 0.7;
+}

@@ -1,0 +1,16 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<core:FragmentDefinition id="PaystubSortDialogFragment" xmlns:core="sap.ui.core" xmlns="sap.m">
+	<ViewSettingsDialog confirm="onSortDialogConfirmed" id="sortingViewSettingsDialog" sortDescending="true">
+		<sortItems>
+			<ViewSettingsItem id="payDateSorter" key="PayDate" selected="true" text="{/#Paystub/PayDate/@sap:label}"/>
+			<!--<ViewSettingsItem id="payTypeSorter" key="PayrollTypeText" text="{/#Paystub/PayrollTypeText/@sap:label}"/>-->
+			<ViewSettingsItem id="grossPaySorter" key="GrosspayAmount" text="{/#Paystub/GrosspayAmount/@sap:label}"/>
+			<ViewSettingsItem id="deductionsSorter" key="DeductionAmount" text="{/#Paystub/DeductionAmount/@sap:label}"/>
+			<ViewSettingsItem id="netPaySorter" key="NetpayAmount" text="{/#Paystub/NetpayAmount/@sap:label}"/>
+		</sortItems>
+	</ViewSettingsDialog>
+</core:FragmentDefinition>

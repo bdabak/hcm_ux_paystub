@@ -1,0 +1,159 @@
+{
+  "_version": "1.5.0",
+  "sap.app": {
+    "id": "com.sedef.hcm.ux.mypaystubs",
+    "type": "application",
+    "i18n": "i18n/i18n.properties",
+    "applicationVersion": {
+      "version": "1.0.25"
+    },
+    "title": "{{appTitle}}",
+    "description": "{{appDescription}}",
+    "tags": {
+      "keywords": ["{{keyWord1}}", "{{keyWord2}}", "{{keyWord3}}"]
+    },
+    "ach": "PA-FIO-PST",
+    "dataSources": {
+      "mainService": {
+        "uri": "/sap/opu/odata/sap/ZHCMFAB_MYPAYSTUBS_SRV/",
+        "type": "OData",
+        "settings": {
+          "odataVersion": "2.0",
+          "localUri": "localService/metadata.xml",
+          "annotations": []
+        }
+      }
+    },
+    "resources": "resources.json",
+    "sourceTemplate": {
+      "id": "sap.ui.ui5-template-plugin.1worklist",
+      "version": "1.36.2",
+      "toolsId": "4ed29312-c232-40b7-8dec-e02137e5e1ae"
+    }
+  },
+  "sap.ui": {
+    "technology": "UI5",
+    "icons": {
+      "icon": "sap-icon://monitor-payments",
+      "favIcon": "",
+      "phone": "",
+      "phone@2": "",
+      "tablet": "",
+      "tablet@2": ""
+    },
+    "deviceTypes": {
+      "desktop": true,
+      "tablet": true,
+      "phone": true
+    },
+    "supportedThemes": ["sap_hcb", "sap_bluecrystal", "sap_belize"]
+  },
+  "sap.ui5": {
+    "dependencies": {
+      "minUI5Version": "1.44.9",
+      "libs": {
+        "sap.m": {},
+        "sap.ui.core": {},
+        "sap.ushell": {}
+      }
+    },
+    "models": {
+      "i18n": {
+        "type": "sap.ui.model.resource.ResourceModel",
+        "uri": "i18n/i18n.properties"
+      },
+      "": {
+        "dataSource": "mainService",
+        "settings": {
+          "useBatch": false,
+          "disableHeadRequestForToken": true,
+          "metadataUrlParams": {
+            "sap-documentation": "heading"
+          },
+          "defaultCountMode": "None",
+          "defaultBindingMode": "TwoWay"
+        },
+        "preload": true
+      }
+    },
+    "resources": {
+      "css": [
+        {
+          "uri": "ext/style.css"
+        }
+      ]
+    },
+    "rootView": {
+      "viewName": "com.sedef.hcm.ux.mypaystubs.view.App",
+      "type": "XML",
+      "id": "app"
+    },
+    "config": {
+      "sapFiori2Adaptation": true
+    },
+    "routing": {
+      "config": {
+        "routerClass": "sap.m.routing.Router",
+        "viewType": "XML",
+        "viewPath": "com.sedef.hcm.ux.mypaystubs.view",
+        "controlId": "app",
+        "controlAggregation": "pages",
+        "bypassed": {
+          "target": ["notFound"]
+        },
+        "async": true
+      },
+      "routes": [
+        {
+          "pattern": "",
+          "name": "authorize",
+          "target": ["authorize"]
+        },
+        {
+          "pattern": "PaystubsList",
+          "name": "paystubsList",
+          "target": ["paystubsList"]
+        },
+        {
+          "pattern": "PaystubDisplaySet/({EmployeeNumber},{SequenceNumber})/$value",
+          "name": "displayPDF",
+          "target": ["displayPDF"],
+          "greedy": false
+        }
+      ],
+      "targets": {
+        "authorize": {
+          "viewName": "Authorize",
+          "viewId": "authorize",
+          "viewLevel": 1
+        },
+        "paystubsList": {
+          "viewName": "PaystubsList",
+          "viewId": "paystubsList",
+          "viewLevel": 2
+        },
+        "displayPDF": {
+          "viewName": "DisplayPDF",
+          "viewId": "displayPDF",
+          "viewLevel": 3
+        },
+        "notFound": {
+          "viewName": "NotFound",
+          "viewId": "notFound"
+        }
+      }
+    },
+    "contentDensities": {
+      "cozy": true,
+      "compact": true
+    }
+  },
+  "sap.fiori": {
+    "registrationIds": ["F1313A"],
+    "archeType": "transactional"
+  },
+  "sap.platform.abap": {
+    "uri": "/sap/bc/ui5_ui5/sap/zhcm_ux_paystub/webapp",
+    "_version": "1.1.0"
+  }
+}

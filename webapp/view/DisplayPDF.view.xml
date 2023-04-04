@@ -1,0 +1,14 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<mvc:View controllerName="com.sedef.hcm.ux.mypaystubs.controller.DisplayPDF" xmlns:core="sap.ui.core" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns="sap.m">
+	<semantic:FullscreenPage id="displayPDFPage" navButtonPress="onNavBack" showNavButton="true" showFooter="{objectView>/showFooter}"
+		floatingFooter="true" title="{i18n>objectTitle}" busy="{objectView>/busy}" busyIndicatorDelay="{objectView>/delay}" enableScrolling="false">
+		<semantic:content>
+			<!-- dynamically filled in DisplayPDF.controller.js-->
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>

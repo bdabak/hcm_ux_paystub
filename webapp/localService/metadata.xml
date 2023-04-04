@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="1.0" xmlns:edmx="http://schemas.microsoft.com/ado/2007/06/edmx"
+	xmlns:m="http://schemas.microsoft.com/ado/2007/08/dataservices/metadata" xmlns:sap="http://www.sap.com/Protocols/SAPData">
+	<edmx:DataServices m:DataServiceVersion="2.0">
+		<Schema Namespace="ZHCMFAB_MYPAYSTUBS_SRV" xml:lang="tr" sap:schema-version="1" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+			<EntityType Name="Paystub" sap:content-version="1">
+				<Key><PropertyRef Name="EmployeeNumber"/><PropertyRef Name="SequenceNumber"/></Key><Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personel numarası"
+					sap:creatable="false" sap:updatable="false"/><Property Name="SequenceNumber" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Sıra numarası" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollPeriodStartDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Bordro dönemi başlangıç tarihi"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollPeriodEndDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Bordro dönemi bitiş tarihi"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollPeriod" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="Bordro dönemi" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollPeriodText" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Bordro dönemi" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollYear" Type="Edm.String" MaxLength="4" sap:unicode="false" sap:label="Bordro yılı" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollType" Type="Edm.String" MaxLength="1" sap:unicode="false" sap:label="Bordro türü tn." sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="PayrollTypeText" Type="Edm.String" MaxLength="60" sap:unicode="false" sap:label="Bordro türü" sap:creatable="false"
+					sap:updatable="false" sap:filterable="false"/><Property Name="OffcycleReasonText" Type="Edm.String" MaxLength="40" sap:unicode="false" sap:label="Devre dışı neden" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="NetpayAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unicode="false" sap:unit="Currency" sap:label="Net ödenen"
+					sap:creatable="false" sap:updatable="false" sap:filterable="false"/><Property Name="GrosspayAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unicode="false" sap:unit="Currency" sap:label="Brüt ödeme"
+					sap:creatable="false" sap:updatable="false" sap:filterable="false"/><Property Name="DeductionAmount" Type="Edm.Decimal" Precision="16" Scale="3" sap:unicode="false" sap:unit="Currency" sap:label="Kesintiler"
+					sap:creatable="false" sap:updatable="false" sap:filterable="false"/><Property Name="Currency" Type="Edm.String" MaxLength="5" sap:unicode="false" sap:label="Para birimi" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false" sap:semantics="currency-code"/><Property Name="PayDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Ödeme tarihi" sap:creatable="false"
+					sap:updatable="false" sap:filterable="false"/><Property Name="BonusDate" Type="Edm.DateTime" Precision="7" sap:unicode="false" sap:label="Ödeme tarihi - devre dışı ödeme"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false" sap:filterable="false"/><NavigationProperty Name="toPaystubDisplay" Relationship="ZHCMFAB_MYPAYSTUBS_SRV.fromPaystubToPaystubDisplay"
+					FromRole="FromRole_fromPaystubToPaystubDisplay" ToRole="ToRole_fromPaystubToPaystubDisplay"/><NavigationProperty Name="toPaystubDownload" Relationship="ZHCMFAB_MYPAYSTUBS_SRV.fromPaystubToPaystubDownload"
+					FromRole="FromRole_fromPaystubToPaystubDownload" ToRole="ToRole_fromPaystubToPaystubDownload"/></EntityType>
+			<EntityType Name="PaystubDisplay" m:HasStream="true" sap:content-version="1">
+				<Key><PropertyRef Name="EmployeeNumber"/><PropertyRef Name="SequenceNumber"/></Key><Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personel numarası"
+					sap:creatable="false" sap:updatable="false" sap:filterable="false"/><Property Name="SequenceNumber" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Sıra numarası" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContentType" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="MIME tipi" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="PaystubDownload" m:HasStream="true" sap:content-version="1">
+				<Key><PropertyRef Name="EmployeeNumber"/><PropertyRef Name="SequenceNumber"/></Key><Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personel numarası"
+					sap:creatable="false" sap:updatable="false" sap:filterable="false"/><Property Name="SequenceNumber" Type="Edm.Int32" Nullable="false" sap:unicode="false" sap:label="Sıra numarası" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/><Property Name="ContentType" Type="Edm.String" MaxLength="128" sap:unicode="false" sap:label="MIME tipi" sap:creatable="false"
+					sap:updatable="false" sap:sortable="false" sap:filterable="false"/></EntityType>
+			<EntityType Name="EmployeeAssignment" sap:content-version="1">
+				<Key><PropertyRef Name="EmployeeNumber"/></Key><Property Name="EmployeeNumber" Type="Edm.String" Nullable="false" MaxLength="8" sap:unicode="false" sap:label="Personel numarası"
+					sap:creatable="false" sap:updatable="false" sap:sortable="false"/><NavigationProperty Name="toPaystubs" Relationship="ZHCMFAB_MYPAYSTUBS_SRV.fromEmployeeAssignmentToPaystubs"
+					FromRole="FromRole_fromEmployeeAssignmentToPaystubs" ToRole="ToRole_fromEmployeeAssignmentToPaystubs"/></EntityType>
+			<EntityType Name="Return" sap:content-version="1">
+				<Key><PropertyRef Name="Type"/><PropertyRef Name="Id"/></Key><Property Name="Type" Type="Edm.String" Nullable="false" MaxLength="1" sap:unicode="false" sap:label="İleti tipi"/><Property Name="Id" Type="Edm.String" Nullable="false" MaxLength="20" sap:unicode="false" sap:label="Message Class"/><Property Name="Number" Type="Edm.String" MaxLength="3" sap:unicode="false" sap:label="İleti numarası"/><Property Name="Message" Type="Edm.String" MaxLength="220" sap:unicode="false" sap:label="İleti metni"/><Property Name="LogNo" Type="Edm.String" MaxLength="20" sap:unicode="false" sap:label="Günlük no."/><Property Name="LogMsgNo" Type="Edm.String" MaxLength="6" sap:unicode="false" sap:label="İleti numarası"/><Property Name="MessageV1" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="İleti değişkeni"/><Property Name="MessageV2" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="İleti değişkeni"/><Property Name="MessageV3" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="İleti değişkeni"/><Property Name="MessageV4" Type="Edm.String" MaxLength="50" sap:unicode="false" sap:label="İleti değişkeni"/></EntityType>
+			<Association Name="fromPaystubToPaystubDownload" sap:content-version="1"><End Type="ZHCMFAB_MYPAYSTUBS_SRV.Paystub" Multiplicity="1" Role="FromRole_fromPaystubToPaystubDownload"/><End Type="ZHCMFAB_MYPAYSTUBS_SRV.PaystubDownload" Multiplicity="0..1" Role="ToRole_fromPaystubToPaystubDownload"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_fromPaystubToPaystubDownload"><PropertyRef Name="SequenceNumber"/><PropertyRef Name="EmployeeNumber"/></Principal>
+					<Dependent Role="ToRole_fromPaystubToPaystubDownload"><PropertyRef Name="SequenceNumber"/><PropertyRef Name="EmployeeNumber"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="fromPaystubToPaystubDisplay" sap:content-version="1"><End Type="ZHCMFAB_MYPAYSTUBS_SRV.Paystub" Multiplicity="1" Role="FromRole_fromPaystubToPaystubDisplay"/><End Type="ZHCMFAB_MYPAYSTUBS_SRV.PaystubDisplay" Multiplicity="0..1" Role="ToRole_fromPaystubToPaystubDisplay"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_fromPaystubToPaystubDisplay"><PropertyRef Name="SequenceNumber"/><PropertyRef Name="EmployeeNumber"/></Principal>
+					<Dependent Role="ToRole_fromPaystubToPaystubDisplay"><PropertyRef Name="SequenceNumber"/><PropertyRef Name="EmployeeNumber"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<Association Name="fromEmployeeAssignmentToPaystubs" sap:content-version="1"><End Type="ZHCMFAB_MYPAYSTUBS_SRV.EmployeeAssignment" Multiplicity="1" Role="FromRole_fromEmployeeAssignmentToPaystubs"/><End Type="ZHCMFAB_MYPAYSTUBS_SRV.Paystub" Multiplicity="*" Role="ToRole_fromEmployeeAssignmentToPaystubs"/>
+				<ReferentialConstraint>
+					<Principal Role="FromRole_fromEmployeeAssignmentToPaystubs"><PropertyRef Name="EmployeeNumber"/></Principal>
+					<Dependent Role="ToRole_fromEmployeeAssignmentToPaystubs"><PropertyRef Name="EmployeeNumber"/></Dependent>
+				</ReferentialConstraint>
+			</Association>
+			<EntityContainer Name="ZHCMFAB_MYPAYSTUBS_SRV_Entities" m:IsDefaultEntityContainer="true" sap:supported-formats="atom json xlsx"><EntitySet Name="PaystubSet" EntityType="ZHCMFAB_MYPAYSTUBS_SRV.Paystub" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/><EntitySet Name="PaystubDisplaySet" EntityType="ZHCMFAB_MYPAYSTUBS_SRV.PaystubDisplay" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="PaystubDownloadSet" EntityType="ZHCMFAB_MYPAYSTUBS_SRV.PaystubDownload" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:content-version="1"/><EntitySet Name="EmployeeAssignmentSet" EntityType="ZHCMFAB_MYPAYSTUBS_SRV.EmployeeAssignment" sap:creatable="false" sap:updatable="false"
+				sap:deletable="false" sap:pageable="false" sap:addressable="false" sap:content-version="1"/><EntitySet Name="ReturnSet" EntityType="ZHCMFAB_MYPAYSTUBS_SRV.Return" sap:creatable="false" sap:updatable="false" sap:deletable="false"
+				sap:pageable="false" sap:content-version="1"/>
+				<AssociationSet Name="fromPaystubToPaystubDownloadSet" Association="ZHCMFAB_MYPAYSTUBS_SRV.fromPaystubToPaystubDownload"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="PaystubSet" Role="FromRole_fromPaystubToPaystubDownload"/><End EntitySet="PaystubDownloadSet" Role="ToRole_fromPaystubToPaystubDownload"/></AssociationSet>
+				<AssociationSet Name="fromEmployeeAssignmentToPaystubsSet" Association="ZHCMFAB_MYPAYSTUBS_SRV.fromEmployeeAssignmentToPaystubs"
+					sap:creatable="false" sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="EmployeeAssignmentSet" Role="FromRole_fromEmployeeAssignmentToPaystubs"/><End EntitySet="PaystubSet" Role="ToRole_fromEmployeeAssignmentToPaystubs"/></AssociationSet>
+				<AssociationSet Name="fromPaystubToPaystubDisplaySet" Association="ZHCMFAB_MYPAYSTUBS_SRV.fromPaystubToPaystubDisplay" sap:creatable="false"
+					sap:updatable="false" sap:deletable="false" sap:content-version="1"><End EntitySet="PaystubSet" Role="FromRole_fromPaystubToPaystubDisplay"/><End EntitySet="PaystubDisplaySet" Role="ToRole_fromPaystubToPaystubDisplay"/></AssociationSet>
+				<FunctionImport Name="SendPayslipViaEmail" ReturnType="ZHCMFAB_MYPAYSTUBS_SRV.Return" EntitySet="ReturnSet" m:HttpMethod="GET"><Parameter Name="EmployeeNumber" Type="Edm.String" Mode="In" MaxLength="8"/><Parameter Name="SequenceNumber" Type="Edm.Int32" Mode="In"/></FunctionImport>
+			</EntityContainer><atom:link rel="self" href="http://localhost:49638/sap/opu/odata/sap/ZHCMFAB_MYPAYSTUBS_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/><atom:link rel="latest-version" href="http://localhost:49638/sap/opu/odata/sap/ZHCMFAB_MYPAYSTUBS_SRV/$metadata"
+				xmlns:atom="http://www.w3.org/2005/Atom"/></Schema>
+	</edmx:DataServices>
+</edmx:Edmx>

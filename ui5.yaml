@@ -1,0 +1,36 @@
+specVersion: "2.4"
+metadata:
+  name: com.sedef.hcm.ux.mypaystubs
+type: application
+server:
+  customMiddleware:
+    - name: fiori-tools-proxy
+      afterMiddleware: compression
+      configuration:
+        ignoreCertError: false
+        backend:
+          - path: /sap
+            url: http://fioritest.sedefshipyard.com:8000
+            client: "100"
+            destination: SEDEF
+          - path: /sap/bc/ui5_ui5
+            destination: SEDEF
+            url: http://fioritest.sedefshipyard.com:8000
+            client: "100"
+        ui5:
+          path:
+            - /resources
+            - /test-resources
+          url: https://ui5.sap.com
+          version: 1.71.49
+    - name: fiori-tools-appreload
+      afterMiddleware: compression
+      configuration:
+        port: 35729
+        path: webapp
+        delay: 300
+    - name: fiori-tools-preview
+      afterMiddleware: fiori-tools-appreload
+      configuration:
+        component: com.sedef.hcm.ux.mypaystubs
+        ui5Theme: sap_fiori_3

@@ -1,0 +1,43 @@
+{
+  "welcomeFile": "index.html",
+  "routes": [
+    {
+      "path": "/sap/opu/odata",
+      "target": {
+        "type": "destination",
+        "name": "SEDEF",
+        "entryPath": "/sap/opu/odata"
+      },
+      "description": "SEDEF"
+    },
+    {
+      "path": "/sap/bc/ui5_ui5",
+      "target": {
+        "type": "destination",
+        "name": "SEDEF",
+        "entryPath": "/sap/bc/ui5_ui5"
+      },
+      "description": "SEDEF"
+    },
+    {
+      "path": "/resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/resources",
+        "version": "1.52.13"
+      },
+      "description": "SAPUI5 Resources"
+    },
+    {
+      "path": "/test-resources",
+      "target": {
+        "type": "service",
+        "name": "sapui5",
+        "entryPath": "/test-resources",
+        "version": "1.52.13"
+      },
+      "description": "SAPUI5 Test Resources"
+    }
+  ]
+}

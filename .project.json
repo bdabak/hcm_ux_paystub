@@ -1,0 +1,31 @@
+{
+  "mockpreview": {
+    "mockUri": "",
+    "metadataFilePath": "",
+    "loadJSONFiles": false,
+    "loadCustomRequests": false,
+    "mockRequestsFilePath": ""
+  },
+  "deploy": {
+    "destination": "SEDEF",
+    "name": "ZHCM_UX_PAYSTUB"
+  },
+  "projectType": [
+    "sap.watt.uitools.ide.fiori",
+    "sap.watt.uitools.ide.web",
+    "com.watt.common.builder.sapui5clientbuild"
+  ],
+  "build": {
+    "buildRequired": true,
+    "sourceFolder": "webapp",
+    "targetFolder": "dist",
+    "lastBuildDateTime": "Tue, 31 May 2022 10:44:36 GMT"
+  },
+  "translation": {
+    "translationDomain": "",
+    "supportedLanguages": "tr",
+    "defaultLanguage": "tr",
+    "defaultI18NPropertyFile": "",
+    "resourceModelName": ""
+  }
+}

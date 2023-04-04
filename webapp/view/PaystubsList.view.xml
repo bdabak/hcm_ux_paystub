@@ -1,0 +1,188 @@
+<!--
+
+    Copyright (C) 2009-2018 SAP SE or an SAP affiliate company. All rights reserved.
+
+-->
+<mvc:View controllerName="com.sedef.hcm.ux.mypaystubs.controller.PaystubsList" xmlns="sap.m" xmlns:mvc="sap.ui.core.mvc"
+	xmlns:semantic="sap.m.semantic" xmlns:core="sap.ui.core" xmlns:common="hcm.fab.lib.common.controls">
+	<semantic:FullscreenPage id="page" navButtonPress="onNavBack" showNavButton="true" class="sapUiResponsiveContentPadding"
+		title="{i18n>paystubsListTitle}" floatingFooter="true" showFooter="false">
+		<semantic:content>
+			<PullToRefresh id="pullToRefresh" refresh="onRefresh" visible="{= !${device>/system/desktop}}"/>
+			<Table id="paystubsTable" class="sapUiResponsiveMargin" items="{}" mode="None" width="auto" fixedLayout="true"
+				noDataText="{paystubsView>/tableNoDataText}" enableBusyIndicator="true" busyIndicatorDelay="{paystubsView>/tableBusyDelay}" growing="true"
+				growingScrollToLoad="{device>/system/desktop}" growingThreshold="{paystubsView>/growingThreshold}" updateStarted="onUpdateStarted"
+				updateFinished="onUpdateFinished">
+				<headerToolbar>
+					<OverflowToolbar>
+						<!-- Title -->
+						<Title id="tableHeader" text="{paystubsView>/paystubsTableTitle}" visible="{= !${device>/system/phone}}"/>
+						<ToolbarSpacer id="toolbarSpacerLeft" visible="{= !${device>/system/phone}}"/>
+						<!-- Search Field -->
+						<SearchField id="searchField" tooltip="{i18n>paystubSearchTooltip}" search="onSearch" liveChange="onLiveChange" width="auto"
+							showRefreshButton="{device>/system/desktop}" refreshButtonTooltip="{i18n>paystubSearchRefreshTooltip}"
+							showSearchButton="{= !${device>/system/phone}}"
+							placeholder="{= ${device>/system/phone} ? ${i18n>paystubSearchPlaceholder} : ${i18n>paystubSearchTooltip}}"
+							enabled="{paystubsView>/toolbarEnabled}">
+							<layoutData>
+								<OverflowToolbarLayoutData minWidth="{= ${device>/system/phone} ? '100px' : '200px'}"
+									maxWidth="{= ${device>/system/phone} ? '150px' : '300px'}" shrinkable="true" priority="NeverOverflow"/>
+							</layoutData>
+						</SearchField>
+						<ToolbarSpacer id="toolbarSpacerRight" visible="{device>/system/phone}"/>
+						<!-- Sort Button -->
+						<OverflowToolbarButton id="toolBtnSort" text="{i18n>sortButtonText}" type="Transparent" tooltip="{i18n>sortTooltip}" icon="sap-icon://sort"
+							press="onSortPressed" enabled="{paystubsView>/toolbarEnabled}"/>
+						<!-- Group Button -->
+						<OverflowToolbarButton id="toolBtnGroup" text="{i18n>groupButtonText}" tooltip="{i18n>groupTooltip}" icon="sap-icon://group-2"
+							press="onGroupPressed" enabled="{paystubsView>/toolbarEnabled}"/>
+						<!-- Export Button -->
+						<!--<OverflowToolbarButton id="toolBtnExport" text="{i18n>exportButtonText}" tooltip="{i18n>exportCSVTooltip}"-->
+						<!--	icon="sap-icon://excel-attachment" press="onDataExport" enabled="{paystubsView>/toolbarEnabled}"-->
+						<!--	visible="{paystubsView>/exportButtonActive}"/>-->
+						<!--CE-Assignment Switch Button -->
+						<common:ConcurrentEmploymentOverflowToolbarButton id="toolBtnCE" assignmentChange="onAssignmentSwitch"
+							assignmentsLoaded="onAssignmentsLoaded" enabled="{paystubsView>/toolbarEnabled}"/>
+						<!-- Personalization Button -->
+						<OverflowToolbarButton id="toolBtnPerso" text="{i18n>personalizeButtonText}" tooltip="{i18n>personalizeTooltip}"
+							icon="sap-icon://action-settings" press="onPersoButtonPressed" visible="{paystubsView>/personalizationActive}"
+							enabled="{paystubsView>/toolbarEnabled}"/>
+						<!--Allow adding buttons to the table toolbar -->
+						<core:ExtensionPoint name="paystubsToolbarExtension"/>
+					</OverflowToolbar>
+				</headerToolbar>
+				<columns>
+					<!-- Columns must have unique IDs because table personalization service is used -->
+					<!-- Payroll Period (Text) -->
+					<Column id="forPeriodCol" hAlign="Begin" demandPopin="true" popinDisplay="{= ${device>/system/phone} ? 'Inline' : 'Block'}"
+						minScreenWidth="Tablet" width="120%">
+						<header>
+							<Text text="{/#Paystub/PayrollPeriod/@sap:label}" id="forPeriodColText" wrapping="true"/>
+						</header>
+					</Column>
+					<!-- Pay Date -->
+					<Column id="payDateCol" hAlign="Begin" width="{= ${device>/system/phone} ? '300%' : '130%'}">
+						<header>
+							<Text text="{/#Paystub/PayDate/@sap:label}" id="payDateColText" wrapping="true"/>
+						</header>
+					</Column>
+					<!-- Payroll Type -->
+					<!--<Column id="payTypeCol" hAlign="Begin" minScreenWidth="Desktop" demandPopin="true"-->
+					<!--	popinDisplay="{= ${device>/system/phone} ? 'Inline' : 'Block'}" width="160%">-->
+					<!--	<header>-->
+					<!--		<Text text="{/#Paystub/PayrollTypeText/@sap:label}" id="payTypeColText"/>-->
+					<!--	</header>-->
+					<!--</Column>-->
+					<!-- Payroll Period (Date Range) -->
+					<!--<Column id="payPeriodCol" hAlign="Begin" demandPopin="false" minScreenWidth="1200px" visible="{= !${device>/system/phone}}" width="180%">-->
+					<!--	<header>-->
+					<!--		<Text text="{paystubsView>/payPeriodColumnTitle}" id="payPeriodColText"/>-->
+					<!--	</header>-->
+					<!--</Column>-->
+					<!-- For-Period (invisible) -->
+					<!--<Column id="forPeriodCol" hAlign="Begin" demandPopin="true" popinDisplay="{= ${device>/system/phone} ? 'Inline' : 'Block'}"-->
+					<!--	minScreenWidth="Tablet" visible="false" width="120%">-->
+					<!--	<header>-->
+					<!--		<Text text="{/#Paystub/PayrollPeriod/@sap:label}" id="forPeriodColText"/>-->
+					<!--	</header>-->
+					<!--</Column>-->
+					<!-- Gross Pay -->
+					<Column id="grossPayCol" hAlign="Right" minScreenWidth="690px" demandPopin="true"
+						popinDisplay="{= ${device>/system/phone} ? 'Inline' : 'Block'}" width="140%">
+						<header>
+							<Text text="{/#Paystub/GrosspayAmount/@sap:label}" id="grossPayColText"/>
+						</header>
+					</Column>
+					<!--Deductions -->
+					<Column id="deductionsCol" hAlign="Right" minScreenWidth="690px" demandPopin="true"
+						popinDisplay="{= ${device>/system/phone} ? 'Inline' : 'Block'}" width="140%">
+						<header>
+							<Text text="{/#Paystub/DeductionAmount/@sap:label}" id="deductionsColText"/>
+						</header>
+					</Column>
+					<!-- Net Pay -->
+					<Column id="netPayCol" hAlign="Right" demandPopin="false" width="{= ${device>/system/phone} ? '450%' : '140%'}">
+						<header>
+							<Text text="{/#Paystub/NetpayAmount/@sap:label}" id="netPayColText" wrapping="true"/>
+						</header>
+					</Column>
+					<!-- Download PDF -->
+					<Column id="actionsColumn" minScreenWidth="Phone" demandPopin="false" popinDisplay="WithoutHeader"
+						hAlign="{= ${device>/system/phone} ? 'End' : 'Center'}" width="{= ${device>/system/phone} ? '120%' : '50%'}"
+						visible="{paystubsView>/downloadActive}">
+						<header>
+							<Text text="{i18n>actionsColumnTitle}" id="downloadPDFColText" visible="{= ${device>/system/phone} ? false : true }"/>
+						</header>
+					</Column>
+					<!--<Column id="downloadPDFCol" minScreenWidth="Phone" demandPopin="false" popinDisplay="WithoutHeader"-->
+					<!--	hAlign="{= ${device>/system/phone} ? 'End' : 'Center'}" width="{= ${device>/system/phone} ? '120%' : '50%'}"-->
+					<!--	visible="{paystubsView>/downloadActive}">-->
+					<!--	<header>-->
+					<!--		<Text text="{i18n>downloadPDFColTitle}" id="downloadPDFColText" visible="false"/>-->
+					<!--	</header>-->
+					<!--</Column>-->
+					<!-- Print PDF -->
+					<!--<Column id="printPDFCol" minScreenWidth="Phone" demandPopin="false" popinDisplay="WithoutHeader"-->
+					<!--	hAlign="{= ${device>/system/phone} ? 'End' : 'Center'}" width="{= ${device>/system/phone} ? '120%' : '50%'}"-->
+					<!--	visible="{paystubsView>/printActive}">-->
+					<!--	<header>-->
+					<!--		<Text text="{i18n>printPDFColTitle}" id="printPDFColText" visible="false"/>-->
+					<!--	</header>-->
+					<!--</Column>-->
+					<!--Allow adding columns to the table -->
+					<core:ExtensionPoint name="paystubsColumnsExtension"/>
+				</columns>
+				<items>
+					<ColumnListItem id="columnListItem"
+						type="{= ${paystubsView>/directPDFDisplayMobile} &amp;&amp; !${device>/system/desktop} ? 'Active' : 'Navigation'}" press="onPress"
+						vAlign="Middle">
+						<cells>
+							<!-- Payroll Period -->
+							<ObjectIdentifier title="{PayrollPeriodText}" class="sapMTableContentMargin"/>
+							<!-- Pay Date -->
+							<Text text="{path:'PayDate', formatter:'.formatter.formatDate'}" class="sapMTableContentMargin"/>
+							<!-- Payroll Type -->
+							<!--<Text text="{PayrollTypeText}" class="sapMTableContentMargin"/>-->
+							<!-- Payroll Period (Date Range) -->
+							<!--<Text-->
+							<!--	text="{parts: [{path: 'PayrollType'},{path: 'PayrollPeriodStartDate'},{path: 'PayrollPeriodEndDate'},{path: 'OffcycleReasonText'}], formatter:'.formatter.formatPayPeriod'}"-->
+							<!--	wrapping="true" class="sapMTableContentMargin"/>-->
+							<!-- For-Period -->
+							<!--<Text text="{path: 'PayrollPeriod', formatter:'.formatter.formatForPeriod'}" class="sapMTableContentMargin"/>-->
+							<!--Gross Pay -->
+							<ObjectNumber
+								number="{ parts:[{path:'GrosspayAmount'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}" state="Success" emphasized="false" class="sapMTableContentMargin"/>
+							<!--Deductions -->
+							<ObjectNumber
+								number="{ parts:[{path:'DeductionAmount'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}" state="Error" emphasized="false" class="sapMTableContentMargin"/>
+							<!--Net Pay -->
+							<ObjectNumber
+								number="{ parts:[{path:'NetpayAmount'},{path:'Currency'}], type: 'sap.ui.model.type.Currency', formatOptions: {showMeasure: false} }"
+								unit="{Currency}" class="sapMTableContentMargin"/>
+							<!-- Download PDF -->
+							<FlexBox alignItems="Center" justifyContent="Center">
+								<Button id="downloadPDFBtn" type="Transparent" icon="sap-icon://download" ariaLabelledBy="downloadPDFButtonLabel" press="onDownloadPDF"
+									tooltip="{i18n>downloadPDFButtonTooltip}" visible="{paystubsView>/downloadActive}" class="sapMTableContentMargin"/>
+								<!-- Print PDF -->
+								<Button id="printPDFBtn" type="Transparent" icon="sap-icon://print" ariaLabelledBy="printPDFButtonLabel" press="onPrintPDF"
+									tooltip="{i18n>printPDFButtonTooltip}" visible="{paystubsView>/printActive}" class="sapMTableContentMargin"/>
+								
+								<Button id="emailPDFBtn" type="Transparent" icon="sap-icon://email" ariaLabelledBy="emailPDFButtonLabel" press="onEmailPDF"
+									tooltip="{i18n>emailPDFButtonTooltip}" visible="{paystubsView>/downloadActive}" class="sapMTableContentMargin"
+									enabled="{= ${SentByEmail} === false ? true : false }"
+									/>
+							</FlexBox>
+							<!--Allow adding cells to the table -->
+							<core:ExtensionPoint name="paystubsCellsExtension"/>
+						</cells>
+					</ColumnListItem>
+				</items>
+			</Table>
+			<core:InvisibleText id="downloadPDFButtonLabel" text="{i18n>downloadPDFButtonTooltip}"/>
+			<core:InvisibleText id="printPDFButtonLabel" text="{i18n>printPDFButtonTooltip}"/>
+			<core:HTML id="idHTML" visible="false"/>
+		</semantic:content>
+	</semantic:FullscreenPage>
+</mvc:View>
